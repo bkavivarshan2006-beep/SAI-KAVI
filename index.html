@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAI KAVI PRINT HUB — SK PRINTERS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f3eee0;
+    --paper-dark:#e9e1cc;
+    --ink:#211f1c;
+    --ink-soft:#4b4742;
+    --stamp:#a8392a;
+    --ribbon:#4f4280;
+    --carbon:#e3c9d6;
+    --line:#c9bfa4;
+    --green-ok:#3c6e47;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(0,0,0,0.035) 1px, transparent 0);
+    background-size:18px 18px;
+  }
+  a{color:inherit;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+  }
+  .brand{display:flex; align-items:center; gap:14px;}
+  .stamp-logo{
+    width:54px; height:54px; border-radius:50%;
+    border:2.5px solid var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-8deg);
+    color:var(--stamp);
+    font-family:'Special Elite',monospace;
+    font-size:9px; text-align:center; line-height:1.1;
+    letter-spacing:0.5px;
+    flex-shrink:0;
+    position:relative;
+  }
+  .stamp-logo::before{
+    content:"";
+    position:absolute; inset:4px;
+    border:1px solid var(--stamp);
+    border-radius:50%;
+  }
+  .brand-text .shop-name{
+    font-family:'Special Elite',monospace;
+    font-size:17px;
+    margin:0;
+    letter-spacing:0.5px;
+  }
+  .brand-text .tagline{
+    margin:2px 0 0;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  nav{display:flex; gap:24px; font-size:14px; font-weight:600;}
+  nav a{text-decoration:none; border-bottom:2px solid transparent; padding-bottom:3px; transition:border-color .2s;}
+  nav a:hover{border-color:var(--stamp);}
+
+  /* ---------- hero (receipt) ---------- */
+  .hero-wrap{display:flex; justify-content:center; padding:54px 20px 30px;}
+  .receipt{
+    width:100%; max-width:480px;
+    background:#fffdf7;
+    box-shadow:0 18px 38px rgba(33,31,28,0.18);
+    padding:34px 30px 30px;
+    position:relative;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .receipt::before, .receipt::after{
+    content:"";
+    position:absolute; left:0; right:0; height:14px;
+    background-image:radial-gradient(circle, var(--paper) 6px, transparent 6.5px);
+    background-size:20px 20px;
+    background-position:-4px center;
+  }
+  .receipt::before{top:-7px;}
+  .receipt::after{bottom:-7px;}
+  .receipt-head{text-align:center; margin-bottom:14px;}
+  .receipt-head .rh-shop{
+    font-family:'Special Elite',monospace;
+    font-size:24px; margin:0; letter-spacing:1px;
+  }
+  .receipt-head .rh-logo{
+    font-size:11px; letter-spacing:3px; color:var(--stamp); margin:4px 0 0; font-weight:700;
+  }
+  .receipt-head .rh-sub{font-size:11px; color:var(--ink-soft); margin:8px 0 0;}
+  .dash{border:none; border-top:1.5px dashed var(--line); margin:16px 0;}
+  .receipt h2.r-title{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:13px;
+    text-transform:uppercase; letter-spacing:2px; color:var(--ribbon);
+    margin:0 0 10px;
+  }
+  .receipt p.r-copy{font-size:13px; line-height:1.7; font-family:'Inter',sans-serif; color:var(--ink-soft);}
+  .receipt .stamp-mark{
+    position:absolute; top:60px; right:24px;
+    width:92px; height:92px;
+    border:3px solid var(--stamp);
+    border-radius:50%;
+    transform:rotate(14deg);
+    color:var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:'Special Elite',monospace;
+    font-size:10px; line-height:1.3;
+    opacity:0.85;
+  }
+  .cta-row{display:flex; gap:10px; margin-top:18px;}
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:13px;
+    padding:11px 16px; border-radius:3px; cursor:pointer; border:2px solid var(--ink);
+    background:var(--ink); color:var(--paper); text-decoration:none; text-align:center; flex:1;
+    transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn.outline{background:transparent; color:var(--ink);}
+
+  /* ---------- sections shared ---------- */
+  section{max-width:920px; margin:0 auto; padding:56px 22px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:3px;
+    color:var(--stamp); text-transform:uppercase; margin:0 0 8px;
+  }
+  h2.section-title{
+    font-family:'Special Elite',monospace; font-size:30px; margin:0 0 28px;
+  }
+
+  /* ---------- services as receipt line items ---------- */
+  .price-slip{
+    background:#fffdf7;
+    border:1px solid var(--line);
+    box-shadow:0 6px 0 var(--paper-dark);
+    padding:6px 0;
+  }
+  .price-row{
+    display:flex; align-items:baseline; gap:10px;
+    padding:14px 26px;
+    border-bottom:1px dashed var(--line);
+    font-family:'JetBrains Mono',monospace;
+  }
+  .price-row:last-child{border-bottom:none;}
+  .price-row .pname{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:15px; white-space:nowrap;
+  }
+  .price-row .pdesc{
+    font-size:12px; color:var(--ink-soft); font-family:'Inter',sans-serif; display:block; margin-top:2px;
+  }
+  .leader{flex:1; border-bottom:1px dotted var(--ink-soft); height:0; transform:translateY(-4px); min-width:20px;}
+  .pamt{font-weight:700; font-size:16px; color:var(--ribbon); white-space:nowrap;}
+  .punit{font-size:11px; color:var(--ink-soft); margin-left:4px;}
+
+  /* edit affordances */
+  .editable-input{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:15px; color:var(--ribbon);
+    border:1.5px solid var(--ribbon); border-radius:3px; width:78px; padding:4px 6px; text-align:right;
+    background:#fff;
+  }
+  .editable-name{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:15px;
+    border:1.5px solid var(--ribbon); border-radius:3px; padding:4px 6px; background:#fff;
+  }
+  .row-actions{display:flex; gap:6px;}
+  .icon-btn{
+    border:1.5px solid var(--ink); background:transparent; border-radius:3px;
+    width:30px; height:30px; cursor:pointer; font-size:14px; line-height:1; color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon-btn:hover{background:var(--ink); color:var(--paper);}
+  .icon-btn.danger{border-color:var(--stamp); color:var(--stamp);}
+  .icon-btn.danger:hover{background:var(--stamp); color:#fff;}
+
+  .add-row{
+    display:flex; gap:8px; padding:16px 26px; flex-wrap:wrap;
+    border-top:2px solid var(--ink); background:var(--paper-dark);
+  }
+  .add-row input{
+    font-family:'Inter',sans-serif; font-size:13px; padding:8px 10px; border:1px solid var(--line); border-radius:3px;
+  }
+  .add-row input[name="price"]{width:90px; font-family:'JetBrains Mono',monospace;}
+  .add-row input[name="name"]{flex:1; min-width:140px;}
+  .add-row input[name="unit"]{width:90px;}
+
+  /* ---------- admin toggle ---------- */
+  .admin-bar{
+    display:flex; align-items:center; justify-content:flex-end; gap:10px;
+    margin-bottom:14px; font-family:'JetBrains Mono',monospace; font-size:12px;
+  }
+  .lock-toggle{
+    border:1.5px solid var(--ink); background:transparent; border-radius:20px;
+    padding:7px 14px; cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:12px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .lock-toggle.unlocked{background:var(--green-ok); color:#fff; border-color:var(--green-ok);}
+  .save-note{color:var(--green-ok); font-weight:600; opacity:0; transition:opacity .3s;}
+  .save-note.show{opacity:1;}
+
+  /* ---------- about / strip ---------- */
+  .strip{
+    background:var(--ink); color:var(--paper);
+    padding:34px 22px;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:18px; text-align:center;
+  }
+  .strip div p.num{font-family:'Special Elite',monospace; font-size:26px; margin:0;}
+  .strip div p.lbl{font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--carbon); margin:4px 0 0;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:start;}
+  .about-grid p{font-size:15px; line-height:1.8; color:var(--ink-soft);}
+  .perforated-card{
+    background:#fffdf7; border:1px solid var(--line); padding:24px;
+    box-shadow:0 6px 0 var(--paper-dark);
+  }
+  .perforated-card ul{margin:0; padding-left:18px; font-size:14px; line-height:2; color:var(--ink-soft);}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- contact ---------- */
+  .contact-wrap{
+    background:#fffdf7; border:1px solid var(--line); padding:30px;
+    display:grid; grid-template-columns:1fr 1fr; gap:30px;
+    box-shadow:0 6px 0 var(--paper-dark);
+  }
+  .contact-wrap h3{font-family:'Special Elite',monospace; margin:0 0 12px; font-size:18px;}
+  .contact-wrap p{font-size:14px; line-height:2; color:var(--ink-soft); margin:0;}
+  @media(max-width:680px){.contact-wrap{grid-template-columns:1fr;}}
+
+  footer{
+    text-align:center; padding:26px 20px; font-size:12px; color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  @media(max-width:600px){
+    nav{display:none;}
+    .price-row{flex-wrap:wrap;}
+    .leader{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="stamp-logo">SK<br>PRINTERS</div>
+    <div class="brand-text">
+      <p class="shop-name">Sai Kavi Print Hub</p>
+      <p class="tagline">Copies · Prints · Stationery</p>
+    </div>
+  </div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#stationery">Stationery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div class="hero-wrap">
+  <div class="receipt">
+    <div class="stamp-mark">EST.<br>QUALITY<br>PRINTS</div>
+    <div class="receipt-head">
+      <p class="rh-shop">SAI KAVI<br>PRINT HUB</p>
+      <p class="rh-logo">SK PRINTERS</p>
+      <p class="rh-sub">your neighbourhood print &amp; stationery counter</p>
+    </div>
+    <hr class="dash">
+    <h2 class="r-title">Order No. 001</h2>
+    <p class="r-copy">Photocopies, colour prints, typing work, mobile reloads and laminating — done while you wait, priced fair, printed right.</p>
+    <hr class="dash">
+    <div class="cta-row">
+      <a href="#services" class="btn">View price list</a>
+      <a href="#contact" class="btn outline">Visit shop</a>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div><p class="num">5+</p><p class="lbl">Core services</p></div>
+  <div><p class="num">A4 / A3</p><p class="lbl">Print sizes</p></div>
+  <div><p class="num">Same Day</p><p class="lbl">Turnaround</p></div>
+  <div><p class="num">Walk-in</p><p class="lbl">No appointment</p></div>
+</div>
+
+<section id="services">
+  <p class="eyebrow">Price list — printing services</p>
+  <h2 class="section-title">What we print</h2>
+
+  <div class="admin-bar">
+    <span class="save-note" id="save-note-services">Saved</span>
+    <button class="lock-toggle" id="toggle-services" onclick="toggleEdit('services')">
+      <span id="lock-icon-services">&#128274;</span> <span id="lock-text-services">Edit prices</span>
+    </button>
+  </div>
+
+  <div class="price-slip" id="services-list"></div>
+
+  <div class="add-row" id="add-row-services" style="display:none;">
+    <input type="text" name="name" id="new-name-services" placeholder="Service name">
+    <input type="text" name="unit" id="new-unit-services" placeholder="unit (per page)">
+    <input type="text" name="price" id="new-price-services" placeholder="₹ price">
+    <button class="btn" style="flex:0; padding:9px 16px;" onclick="addItem('services')">+ Add service</button>
+  </div>
+</section>
+
+<section id="stationery">
+  <p class="eyebrow">Price list — stationery</p>
+  <h2 class="section-title">What we stock</h2>
+
+  <div class="admin-bar">
+    <span class="save-note" id="save-note-stationery">Saved</span>
+    <button class="lock-toggle" id="toggle-stationery" onclick="toggleEdit('stationery')">
+      <span id="lock-icon-stationery">&#128274;</span> <span id="lock-text-stationery">Edit prices</span>
+    </button>
+  </div>
+
+  <div class="price-slip" id="stationery-list"></div>
+
+  <div class="add-row" id="add-row-stationery" style="display:none;">
+    <input type="text" name="name" id="new-name-stationery" placeholder="Item name">
+    <input type="text" name="unit" id="new-unit-stationery" placeholder="unit (per piece)">
+    <input type="text" name="price" id="new-price-stationery" placeholder="₹ price">
+    <button class="btn" style="flex:0; padding:9px 16px;" onclick="addItem('stationery')">+ Add item</button>
+  </div>
+</section>
+
+<section id="about">
+  <p class="eyebrow">Counter notes</p>
+  <h2 class="section-title">About the shop</h2>
+  <div class="about-grid">
+    <p>
+      Sai Kavi Print Hub is run as a straightforward neighbourhood counter — the kind of shop where you bring a pen-drive,
+      a school form, or a phone that needs topping up, and walk out with it sorted in a few minutes. SK Printers stands
+      behind every photocopy, print and laminate that goes out the door.
+      <br><br>
+      No queues for simple jobs, no minimum order on prints, and prices that are pinned up and kept current —
+      what you see on this page is what you pay at the counter.
+    </p>
+    <div class="perforated-card">
+      <ul>
+        <li>Photocopying — B/W &amp; colour, A4 and A3</li>
+        <li>Document typing and DTP work</li>
+        <li>Mobile recharge / reload counter</li>
+        <li>Lamination — ID size to A4</li>
+        <li>Stationery — pens, files, notebooks &amp; more</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="eyebrow">Find us</p>
+  <h2 class="section-title">Visit the counter</h2>
+  <div class="contact-wrap">
+    <div>
+      <h3>Shop hours</h3>
+      <p>Monday – Saturday: 9:00 AM – 8:30 PM<br>Sunday: 10:00 AM – 2:00 PM</p>
+    </div>
+    <div>
+      <h3>Address</h3>
+      <p>Sai Kavi Print Hub<br>SK Printers Counter<br>[Your shop address — street, area]<br>[City, PIN code]</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  SAI KAVI PRINT HUB — SK PRINTERS · prices last updated by shop staff, editable from this page
+</footer>
+
+<script>
+const DEFAULTS = {
+  services: [
+    {id:'s1', name:'Photo copy A4', unit:'per page', price:2},
+    {id:'s2', name:'Colour print', unit:'per page', price:10},
+    {id:'s3', name:'Typing', unit:'per page', price:25},
+    {id:'s4', name:'Mobile / DTH reload', unit:'per recharge', price:5},
+    {id:'s5', name:'Laminating', unit:'per sheet', price:15}
+  ],
+  stationery: [
+    {id:'t1', name:'Ball pen', unit:'per piece', price:10},
+    {id:'t2', name:'A4 ruled notebook', unit:'per piece', price:35},
+    {id:'t3', name:'Plastic file folder', unit:'per piece', price:20},
+    {id:'t4', name:'Stapler pins (box)', unit:'per box', price:15}
+  ]
+};
+
+let state = { services:[], stationery:[] };
+let editMode = { services:false, stationery:false };
+
+async function loadData(type){
+  try{
+    const res = await window.storage.get('catalog:'+type, true);
+    state[type] = JSON.parse(res.value);
+  }catch(e){
+    state[type] = DEFAULTS[type];
+    try{ await window.storage.set('catalog:'+type, JSON.stringify(state[type]), true); }catch(e2){}
+  }
+  render(type);
+}
+
+async function saveData(type){
+  try{
+    await window.storage.set('catalog:'+type, JSON.stringify(state[type]), true);
+    const note = document.getElementById('save-note-'+type);
+    note.classList.add('show');
+    setTimeout(()=>note.classList.remove('show'), 1200);
+  }catch(e){
+    console.error('save failed', e);
+  }
+}
+
+function render(type){
+  const list = document.getElementById(type+'-list');
+  list.innerHTML = '';
+  state[type].forEach(item=>{
+    const row = document.createElement('div');
+    row.className = 'price-row';
+    if(editMode[type]){
+      row.innerHTML = `
+        <input class="editable-name" value="${escapeHtml(item.name)}" data-field="name" data-id="${item.id}" style="flex:1; min-width:120px;">
+        <input class="editable-name" value="${escapeHtml(item.unit)}" data-field="unit" data-id="${item.id}" style="width:110px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-weight:700;">₹</span>
+        <input class="editable-input" value="${item.price}" data-field="price" data-id="${item.id}" inputmode="decimal">
+        <div class="row-actions">
+          <button class="icon-btn danger" title="Remove" data-remove="${item.id}">&#10005;</button>
+        </div>`;
+    } else {
+      row.innerHTML = `
+        <span class="pname">${escapeHtml(item.name)}<span class="pdesc">${escapeHtml(item.unit)}</span></span>
+        <span class="leader"></span>
+        <span class="pamt">&#8377;${formatPrice(item.price)}<span class="punit"></span></span>`;
+    }
+    list.appendChild(row);
+  });
+
+  if(editMode[type]){
+    list.querySelectorAll('input').forEach(inp=>{
+      inp.addEventListener('change', (e)=>{
+        const id = e.target.getAttribute('data-id');
+        const field = e.target.getAttribute('data-field');
+        const obj = state[type].find(x=>x.id===id);
+        if(!obj) return;
+        if(field === 'price'){
+          const v = parseFloat(e.target.value);
+          obj.price = isNaN(v) ? 0 : v;
+        } else {
+          obj[field] = e.target.value;
+        }
+        saveData(type);
+      });
+    });
+    list.querySelectorAll('[data-remove]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const id = e.target.getAttribute('data-remove');
+        state[type] = state[type].filter(x=>x.id!==id);
+        render(type);
+        saveData(type);
+      });
+    });
+  }
+}
+
+function formatPrice(p){
+  const n = Number(p);
+  return Number.isInteger(n) ? n : n.toFixed(2);
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+const OWNER_PASSCODE = "skprinters786";
+
+function toggleEdit(type){
+  if(!editMode[type]){
+    const entered = prompt("Enter shop owner passcode to edit prices:");
+    if(entered !== OWNER_PASSCODE){
+      if(entered !== null) alert("Wrong passcode. Prices stay locked.");
+      return;
+    }
+  }
+  editMode[type] = !editMode[type];
+  const btn = document.getElementById('toggle-'+type);
+  const icon = document.getElementById('lock-icon-'+type);
+  const text = document.getElementById('lock-text-'+type);
+  const addRow = document.getElementById('add-row-'+type);
+  if(editMode[type]){
+    btn.classList.add('unlocked');
+    icon.innerHTML = '&#128275;';
+    text.textContent = 'Done editing';
+    addRow.style.display = 'flex';
+  } else {
+    btn.classList.remove('unlocked');
+    icon.innerHTML = '&#128274;';
+    text.textContent = 'Edit prices';
+    addRow.style.display = 'none';
+  }
+  render(type);
+}
+
+function addItem(type){
+  const nameInp = document.getElementById('new-name-'+type);
+  const unitInp = document.getElementById('new-unit-'+type);
+  const priceInp = document.getElementById('new-price-'+type);
+  const name = nameInp.value.trim();
+  const unit = unitInp.value.trim() || 'per item';
+  const price = parseFloat(priceInp.value) || 0;
+  if(!name) { nameInp.focus(); return; }
+  const id = type[0] + Date.now();
+  state[type].push({id, name, unit, price});
+  nameInp.value=''; unitInp.value=''; priceInp.value='';
+  render(type);
+  saveData(type);
+}
+
+loadData('services');
+loadData('stationery');
+</script>
+
+</body>
+</html>
